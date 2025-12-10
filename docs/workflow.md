@@ -65,7 +65,7 @@
 
 - Add a `.env` file at the repo root with `AUTO_MODE=true` (default) or `AUTO_MODE=false`.
 - When `AUTO_MODE=true`, orchestration advances through Plan/Spec/Code/Doc/Review without asking the user after Hearing.
-- When `AUTO_MODE=false`, orchestration must pause before each new phase after Hearing and ask the user to confirm whether to proceed.
+- When `AUTO_MODE=false`, orchestration must pause before each new phase after Hearing, ask the user to confirm whether to proceed, and post to the user chat after each phase end with the result and the proposed next phase.
 
 ## Recommended directory layout
 
