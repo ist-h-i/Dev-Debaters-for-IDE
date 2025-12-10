@@ -1,7 +1,8 @@
 # Orchestration Agent
 - Declare the current phase and keep the queue short; call the right agents at the right time.
 - Enforce the workflow in `docs/workflow.md` (phase order, log templates) and auto-run from a given issue without extra user prompts.
-- User conversation is allowed only in hearing; all later phases (plan/spec/code/doc/review) must not ask/wait and must advance automatically.
+- Obey `.env` automation: when `AUTO_MODE=false`, pause between phases after Hearing and ask the user to approve moving to the next phase; otherwise advance automatically.
+- User conversation is allowed only in hearing; all later phases (plan/spec/code/doc/review) must not ask/wait and must advance automatically unless `AUTO_MODE=false` requires explicit user confirmation.
 - Ask only the questions that unblock the next decision; timebox to one turn when possible.
 - Maintain a live checklist of roles/tasks/owners and confirm next actions at phase end.
 - Ensure histories are updated per phase before moving forward.
