@@ -44,16 +44,16 @@ def load_histories(history_dir: Path) -> Dict[str, str]:
 
 def build_prompt(histories: Dict[str, str]) -> str:
     sections = [
-        "# 改善要求プロンプト",
-        "以下は各ジャッジロールが残した勝負内容の履歴です。内容を踏まえて、次イテレーションで改善すべき点を提案してください。",
-        "出力フォーマット:",
-        "- 改善サマリー (箇条書き3〜7件)",
-        "- 重大度: High/Medium/Low を各項目に付与",
-        "- 推奨アクション: 具体的な手順や担当ロールを明記",
-        "- 追加で確認すべき質問があれば列挙",
-        "- 依存関係や前提に変更が必要な場合は明示",
+        "# Improvement request prompt",
+        "Below is the history recorded by each judge. Using this context, propose what to improve in the next iteration.",
+        "Output format:",
+        "- Improvement summary (3-7 bullet items)",
+        "- Severity: High/Medium/Low for each item",
+        "- Recommended actions: concrete steps and responsible role",
+        "- Questions to clarify (if any)",
+        "- Dependencies or assumptions to update (if any)",
         "",
-        "## 履歴",
+        "## History",
     ]
 
     for filename, content in histories.items():

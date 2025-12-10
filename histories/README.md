@@ -1,17 +1,17 @@
-# Histories ログ運用
-- フェーズごとに 1 エントリを追記する（追記のみ、上書きしない）。
-- テンプレートを厳守し、日本語で簡潔に書く。
-- ファイル名は `YYYYMMDD_<phase>.md` など日付入りで重複を避ける。
-- ログ更新後に次フェーズへ進むかはジャッジが決定する。
-- ジャッジがフェーズ終了時に直接追記する（ファイルが無ければ作成）。
+# Histories log guide
+- Append one entry per phase (append-only; never overwrite).
+- Use the template strictly and write concisely in English.
+- Keep one persistent log per phase (e.g., `hearing.md`, `plan.md`); do not split logs by date so downstream improvement workflows see full history.
+- The judge decides whether to move to the next phase after updating the log.
+- Judges append directly at phase end (create the file if missing).
 
 ```
-## フェーズ: ヒアリング / オーケストレーション / 設計 / コーチング / ドキュメント / レビュー
-## 参加者と主張要約
-- 役割A: ...
-- 役割B: ...
-## 勝者/採用案
+## Phase: Hearing / Orchestration / Plan / Spec / Code / Doc / Review
+## Participants & claim summary
+- Role A: ...
+- Role B: ...
+## Winner / adopted proposal
 - ...
-## 次のアクション / TODO
+## Next actions / TODO
 - ...
 ```

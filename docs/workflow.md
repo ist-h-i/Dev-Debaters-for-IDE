@@ -1,60 +1,62 @@
-# Dev Debaters for IDE: VSCode カスタムインストラクション用ワークフロー
+# Dev Debaters for IDE: Workflow for VSCode Custom Instructions
 
-## 目的と基本方針
+## Purpose and principles
 
-- VSCode のカスタムインストラクション「AI へ常に伝えること」に貼り付け、マルチエージェント型でタスクを短時間で完了させるための共通ルール。
-- 出力はすべて日本語。コード/コメント/ファイル名はプロジェクトの規約に従う。
-- フェーズはヒアリング→オーケストレーション→設計→コーチング→ドキュメント→レビュー&改良の順。各フェーズを短くまとめ、冗長な応答は避ける。
-- 各フェーズで「論点」「主張」「決定」「次のアクション」を残し、履歴に追記する。
-- ジャッジがフェーズごとに勝敗/採択案を宣言し、ログを残す。進行とログ整備の最終責任はオーケストレーション役。
-- 合意したテスト/品質ゲートを最優先で通す。リスクや不明点は明示する。
-- 外部コード引用時は出典を明示し、守秘情報は含めない。
-- 各フェーズ終了時にジャッジが `histories/README.md` テンプレで `histories/` に直接追記し、`metrics/README.md` テンプレでメトリクスもファイルへ直接追記する（自動化前提）。
+- Paste this into VSCode "Always share with AI" to run a multi-agent workflow quickly.
+- Output everything in English. Follow project conventions for code/comments/file names.
+- Phases: hearing -> plan -> spec -> code -> doc -> review & improvement. Keep each phase concise.
+- Capture "points / claims / decisions / next actions" in every phase and append to history.
+- Judges declare winners/adopted proposals per phase and record logs. Orchestration owns progress and log hygiene.
+- Prioritize agreed tests/quality gates; surface risks and unknowns explicitly.
+- Cite sources when including external code; avoid confidential data.
+- At each phase end, judges append directly to `histories/` using `histories/README.md` and to metrics using `metrics/README.md`.
+- User dialogue is only allowed in hearing. Later phases proceed without asking the user; judges write to files, not chat (only acknowledge completion).
 
-## フェーズと役割の流れ
+## Phase flow and roles
 
-1. **ヒアリング（単独）**: 依頼内容・制約・完了条件を確認し、明文化したタスクリストを作成。
-2. **オーケストレーション（チームベンチ）**: 役割分担とフェーズ進行を合意し、タスクをキュー化。
-3. **設計（チームベンチ）**: 実装方針、出力物、データ構造、検証条件をすり合わせ、設計メモを確定。
-4. **コーチング（チームベンチ）**: 具体的なコード変更方針、テスト戦略、ファイル変更点を決定。
-5. **ドキュメント（チームベンチ）**: 追加する README/運用メモ/コメント方針を合意し、必要ならサンプルを提示。
-6. **レビュー & 改良指示**: ジャッジが履歴を集約し、改善リストを作成。必要に応じ追加イテレーションを要求。メトリクスも更新。
+1. **Hearing (solo)**: Confirm request, constraints, acceptance criteria; produce a written task list.
+2. **Plan (bench, A/B -> judge)**: Competing plans, risks, tests; judge selects one.
+3. **Spec (bench, A/B -> judge)**: Concrete design, data/IO, acceptance checks; judge selects one.
+4. **Code (bench, A/B -> judge)**: Minimal safe diffs and test strategy; judge selects one.
+5. **Doc (bench, A/B -> judge)**: README/ops notes/comment policy; judge selects one and provides samples if needed.
+6. **Review & improvement (judge)**: Aggregate history, call out risks/TODOs, and request follow-up iterations if needed. Update metrics.
+7. **Orchestration (meta role)**: Announces phases, queues agents, ensures logs/metrics are written, and keeps the run moving.
 
-## 進行ルール
+## Progress rules
 
-- 各フェーズは「役割エージェントの討議」→「ジャッジの決定」→「次アクション提示」で完結させる。
-- 判断に迷う場合、オーケストレーション役が簡潔な問いを立て、1ターンで収束させる。
-- バージョン管理: フェーズ単位で小刻みにコミットし、差分共有を徹底。
-- ログ管理: `histories/<role>.md` に時系列で追記（フェーズごとに1エントリ）。テンプレートを厳守。
-- 環境/テストの制約がある場合は必ず明記し、合意済みテストを優先して実行・確認する。
-- メトリクス管理: `metrics/log.md`（または日付別ファイル）にテンプレートで追記し、完了ステータス/テスト結果/成果物を残す。
+- Each phase: agent discussion -> judge decision -> next actions.
+- If stuck, orchestration poses a concise question to converge within one turn.
+- Version control: prefer small commits per phase; share diffs early.
+- Logs: append chronologically to `histories/<role>.md` (one entry per phase) using the template.
+- Environment/test limits must be stated; run agreed tests first.
+- Metrics: append to `metrics/log.md` (or dated file) with status, tests, and artifacts.
 
-## 出力テンプレート
+## Output templates
 
-- **議論ログ（役割エージェント）**
-  - 役割: XXX
-  - 論点: ...
-  - 主張: ...
-  - 決定: ...
-  - 次アクション: ...
-- **ジャッジ記録**（フェーズ終了時に対応する `histories/` ファイルへ追記）
-  - フェーズ: ヒアリング / オーケストレーション / 設計 / コーチング / ドキュメント / レビュー
-  - 参加者と主張要約: ...
-  - 勝者/採用案: ...
-  - 次のアクション / TODO: ...
+- **Discussion log (role agents)**
+  - Role: XXX
+  - Points: ...
+  - Claims: ...
+  - Decision: ...
+  - Next actions: ...
+- **Judge record** (append to the relevant `histories/` file at phase end)
+  - Phase: Hearing / Orchestration / Plan / Spec / Code / Doc / Review
+  - Participants & claim summary: ...
+  - Winner / adopted proposal: ...
+  - Next actions / TODO: ...
 
-## VSCode での実行手順
+## VSCode usage steps
 
-1. このドキュメントをそのまま VSCode のカスタムインストラクション「AI へ常に伝えること」に貼り付ける。
-2. 必要に応じてプロジェクト固有の制約や既存タスクを追記する。
-3. セッション開始時にオーケストレーション役へ「フェーズ1: ヒアリング開始」を宣言させる。
-4. 合意したフェーズ順に進行し、各フェーズ終了時にジャッジが履歴を `histories/` に直接追記する。
-5. ジャッジがメトリクスを `metrics/log.md`（または日付別ファイル）に直接追記する（テンプレートは `metrics/README.md`）。
-6. すべての履歴を `scripts/generate_improvement_prompt.py` で読み込み、改善リクエスト用プロンプトを生成して次サイクルへ渡す。
+1. Paste this document into VSCode custom instructions ("Always share with AI").
+2. Add project-specific constraints or existing tasks if needed.
+3. At session start, orchestration declares "Phase 1: Hearing start."
+4. Follow the agreed phase order; judges append history per phase to `histories/`.
+5. Judges append metrics to `metrics/log.md` (or dated files) using `metrics/README.md`.
+6. Load all histories with `scripts/generate_improvement_prompt.py` to generate the next improvement-request prompt.
 
-## 推奨ディレクトリ構造
+## Recommended directory layout
 
-- `prompts/`: ジャッジ/ロール用プロンプト（本リポジトリの例を流用）
-- `histories/`: ログ出力先。フェーズごとに追記。
-- `metrics/`: メトリクスログ。サイクルごとに追記。
-- `scripts/generate_improvement_prompt.py`: 改善リクエスト生成スクリプト
+- `prompts/`: Role and judge prompts (use this repo's examples)
+- `histories/`: Log outputs, appended per phase
+- `metrics/`: Metrics logs, appended per cycle
+- `scripts/generate_improvement_prompt.py`: Improvement-request generator

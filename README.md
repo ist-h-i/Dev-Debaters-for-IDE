@@ -1,13 +1,15 @@
 # Dev Debaters for IDE
 
-VSCode のカスタムインストラクションで動かせるディベート型エージェントワークフローのテンプレート。
+A debate-style agent workflow template that runs via VSCode custom instructions.
 
-## 内容
-- `docs/workflow.md`: デフォルトで AI に伝えるワークフロー指示。
-- `prompts/`: ヒアリング/オーケストレーション/設計/コーディング/ドキュメントの各ジャッジプロンプト。
-- `scripts/generate_improvement_prompt.py`: 各フェーズの履歴から改善要求プロンプトを生成するスクリプト。
+## Contents
+- `docs/workflow.md`: Default workflow rules for the agents.
+- `prompts/`: Prompts for hearing/orchestration/spec/plan/code/doc/review agents and judges.
+- `scripts/generate_improvement_prompt.py`: Generates an improvement-request prompt from phase histories.
 
-## 使い方
-1. `docs/workflow.md` を VSCode のカスタムインストラクションに貼り付ける。
-2. 必要に応じて `prompts/` 以下のプロンプトを各ロールに読み込ませる。
-3. 議論ログを `histories/` ディレクトリに保存し、スクリプトで改善要求を生成する。
+## How to use
+1. Paste `docs/workflow.md` into VSCode "Custom Instructions -> Always share with AI" to set the common rules (English output, phase order, logging).
+2. Load the role/judge prompts under `prompts/` (orchestration, hearing, and the plan/spec/code/doc/review pairs).
+3. At session start, have the orchestration role declare "Phase 1: Hearing start" and invoke subsequent phases automatically. To auto-run from startup, send the block in `docs/codex_auto_start.md`.
+4. After each phase, the judge appends a log to `histories/YYYYMMDD_<phase>.md` using `histories/README.md`, and appends metrics to `metrics/log.md` (or a dated file) using `metrics/README.md`.
+5. After a cycle, optionally run `scripts/generate_improvement_prompt.py --history-dir histories --output improvements.txt` to produce an improvement-request prompt for the next iteration.

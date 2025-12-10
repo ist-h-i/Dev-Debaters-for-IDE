@@ -1,14 +1,14 @@
-# Metrics ログ運用
-- 1 サイクルにつき 1 エントリを追記（追記のみ）。
-- ファイルは `metrics/log.md` にまとめて追記するか、必要なら `metrics/YYYYMMDD_<issue>.md` で分割してもよい。
-- ジャッジはフェーズ完了時に最新エントリをファイルへ直接追記する（なければ作成）。
+# Metrics log guide
+- Append one entry per cycle (append-only).
+- Keep one persistent log file `metrics/log.md`; do not split by day or issue so the full performance history stays in one place.
+- Judges append the latest entry directly at phase completion (create the file if missing).
 
 ```
-## Issue: <短いタイトルまたはリンク>
+## Issue: <short title or link>
 - Date: YYYY-MM-DD
-- Phases: hearing / orchestration / spec / plan / code / doc / review (完了したものだけ残す)
+- Phases: hearing / orchestration / plan / spec / code / doc / review (keep only completed ones)
 - Outcome: shipped / blocked / retry
-- Tests: <実行したテストと結果の箇条書き>
-- Artifacts: <変更ファイルや主要成果物の一覧>
-- Risks/Follow-ups: <残リスクや次サイクルで見る点>
+- Tests: <list tests run and results>
+- Artifacts: <files changed or key outputs>
+- Risks/Follow-ups: <remaining risks or items for next cycle>
 ```
