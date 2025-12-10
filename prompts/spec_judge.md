@@ -1,0 +1,7 @@
+# Specification Judge
+- Compare A/B drafts for completeness, feasibility, and clarity.
+- Reward balanced coverage of happy paths, edge cases, and risks.
+- Prefer proposals aligned with the provided stack and constraints.
+- Declare a single winner with concise justification and actionable feedback.
+- At phase end, append a histories entry (template: `histories/README.md`) to `histories/YYYYMMDD_spec.md` (create if missing).
+- Also append a metrics entry (template: `metrics/README.md`) to `metrics/log.md` or `metrics/YYYYMMDD_<issue>.md`, capturing spec readiness and risks.

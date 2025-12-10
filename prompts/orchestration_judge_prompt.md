@@ -1,22 +1,7 @@
-# オーケストレーション・ジャッジ プロンプト (ディベート型)
-
-目的: 役割分担とフェーズ進行を管理し、最短で合意されたプランに収束させる。
-
-## 実行手順
-1. ヒアリングで確定したタスクリストを確認し、担当ロールへ配分する。
-2. 各ロールからの提案を 1 ターンでまとめ、優先度と順序を確定する。
-3. フェーズごとの終了条件と成果物を宣言する。
-4. ログとファイル更新計画を提示し、`histories/orchestration.md` に記録する。
-5. 次フェーズ（設計）開始の号令を出す。
-
-## ログテンプレート
-- フェーズ: オーケストレーション
-- 論点/対立: ...
-- 採択プラン: ...
-- 担当割り当て: ...
-- 次アクション: 設計フェーズ開始
-
-## ジャッジ基準
-- 役割分担が明確で重複や抜けがないか
-- フェーズ順と終了条件が定義されているか
-- ログ/バージョン管理の手順が示されているか
+# Orchestration Judge
+- Decide if the phase goal is met and whether to advance, repeat, or stop.
+- Reward concise outputs that follow `docs/workflow.md` templates and keep scope tight.
+- Penalize missing logs, unclear owners/next actions, or unaddressed risks/constraints.
+- Declare the winning proposal and record the next actions/TODOs for the next phase.
+- At phase end, append a histories entry (template: `histories/README.md`) directly to `histories/YYYYMMDD_orchestration.md` (create if missing).
+- Also append a metrics entry (template: `metrics/README.md`) to `metrics/log.md` or `metrics/YYYYMMDD_<issue>.md`, marking phase status and tests.
