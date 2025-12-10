@@ -22,6 +22,13 @@
 6. **Review & improvement (judge)**: Aggregate history, call out risks/TODOs, and request follow-up iterations if needed. Update metrics.
 7. **Orchestration (meta role)**: Announces phases, queues agents, ensures logs/metrics are written, and keeps the run moving.
 
+### Per-phase orchestration sequence (Plan/Spec/Code/Doc)
+
+- Orchestration issues the phase start, then explicitly prompts **Agent A** to produce its proposal/output for that phase.
+- Once Agent A replies, orchestration forwards the full output to **Agent B** for critique/refinement and awaits B's response.
+- After both agent outputs are collected, orchestration triggers the **Judge** to compare A vs B, select or synthesize the winner, record the decision, and only then advance to the next phase.
+- These hand-offs are automatic; no additional user queries occur after Hearing.
+
 ## Progress rules
 
 - Each phase: agent discussion -> judge decision -> next actions.
