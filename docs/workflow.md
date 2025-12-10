@@ -14,7 +14,7 @@
 
 ## Phase flow and roles
 
-1. **Hearing (solo)**: Confirm request, constraints, acceptance criteria; produce a written task list.
+1. **Hearing (bench, A/B -> judge)**: Two hearing agents gather requirements with complementary question sets; judge selects the consolidated summary/questions to present, then capture the single user reply.
 2. **Plan (bench, A/B -> judge)**: Competing plans, risks, tests; judge selects one.
 3. **Spec (bench, A/B -> judge)**: Concrete design, data/IO, acceptance checks; judge selects one.
 4. **Code (bench, A/B -> judge)**: Minimal safe diffs and test strategy; judge selects one.
