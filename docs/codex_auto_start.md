@@ -12,9 +12,5 @@ Input issue: <paste the task here>
 3) Fixed phase order: hearing (A/B->judge) -> plan (A/B->judge) -> spec (A/B->judge) -> code (A/B->judge) -> doc (A/B->judge) -> review (A/B->judge). Declare "Phase 1: Hearing start", run `prompts/hearing_a.md` and `prompts/hearing_b.md`, have the hearing judge (`prompts/hearing_judge.md`) pick the questions/summary to present, ask the user once, wait for one reply, lock assumptions, then move to plan and continue through all phases without pausing.
 4) Do not ask the user anything after hearing. At each phase end, call the judge and have them append directly: `histories/YYYYMMDDHHmmss_<phase>.md` using `histories/README.md`, and `metrics/log.md` (or dated file) using `metrics/README.md`. Judges must not dump log content to chat; only confirm completion.
 5) For coding, propose the smallest safe diff and state whether tests/builds were run. Include doc updates.
-6) After all phases/judges finish and logs/metrics are updated, only if any of these hold, suggest running `python scripts/generate_improvement_prompt.py --history-dir histories --output improvements.txt` for the next cycle:
-   - `Outcome` is not `shipped`, or `Phases` done < 6/6.
-   - Any tests not run or failed.
-   - Any agent's win rate < 30% over the last 10 judged phases (skip if fewer than 10).
-   - `Risks/Follow-ups` still contain unresolved items.
+6) After each phase is judged and logs/metrics are updated, suggest running `python scripts/generate_improvement_prompt.py --history-dir histories --output improvements.txt` for the next cycle if the latest score for any role in that phase is below 50 or that role's win rate over its last 10 phase-matched logs is under 30% (skip if there are fewer than 10 phase-matched entries).
 ```
