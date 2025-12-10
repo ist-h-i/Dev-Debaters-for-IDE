@@ -10,7 +10,7 @@
 - Prioritize agreed tests/quality gates; surface risks and unknowns explicitly.
 - Cite sources when including external code; avoid confidential data.
 - At each phase end, judges append directly to `histories/` using `histories/README.md` and to metrics using `metrics/README.md`.
-- User dialogue is only allowed in hearing. Later phases proceed without asking the user; judges write to files, not chat (only acknowledge completion).
+- User dialogue is only allowed in hearing. Later phases proceed without asking the user **unless** automation is disabled via `.env` (see Automation toggle below); judges write to files, not chat (only acknowledge completion).
 
 ## Phase flow and roles
 
@@ -27,7 +27,7 @@
 - Orchestration issues the phase start, then explicitly prompts **Agent A** to produce its proposal/output for that phase.
 - Once Agent A replies, orchestration forwards the full output to **Agent B** for critique/refinement and awaits B's response.
 - After both agent outputs are collected, orchestration triggers the **Judge** to compare A vs B, select or synthesize the winner, record the decision, and only then advance to the next phase.
-- These hand-offs are automatic; no additional user queries occur after Hearing.
+- These hand-offs are automatic; no additional user queries occur after Hearing **unless** automation is disabled (see Automation toggle).
 
 ## Progress rules
 
@@ -60,6 +60,12 @@
 4. Follow the agreed phase order; judges append history per phase to `histories/`.
 5. Judges append metrics to `metrics/log.md` (or dated files) using `metrics/README.md`.
 6. Load all histories with `scripts/generate_improvement_prompt.py` to generate the next improvement-request prompt.
+
+## Automation toggle
+
+- Add a `.env` file at the repo root with `AUTO_MODE=true` (default) or `AUTO_MODE=false`.
+- When `AUTO_MODE=true`, orchestration advances through Plan/Spec/Code/Doc/Review without asking the user after Hearing.
+- When `AUTO_MODE=false`, orchestration must pause before each new phase after Hearing and ask the user to confirm whether to proceed.
 
 ## Recommended directory layout
 
