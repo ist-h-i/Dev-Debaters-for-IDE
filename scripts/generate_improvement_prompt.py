@@ -1,28 +1,24 @@
-"""Collect debate histories and build an improvement request prompt for the next AI iteration.
+"""Collect the metrics log and build an improvement request prompt for the next AI iteration.
 
 Usage:
     python scripts/generate_improvement_prompt.py \
-        --history-dir histories \
+        --metrics-log metrics/log.md \
         [--output improvements.txt]
 
-The script concatenates all files in the history directory and outputs a
-single prompt that summarizes the context and asks an AI to propose
-improvements. Files are embedded with fenced code blocks to preserve
-formatting.
+The script embeds the metrics log into a single prompt that summarizes the
+context and asks an AI to propose improvements using the metrics output format.
 """
 
 import argparse
 from pathlib import Path
 import sys
-from typing import Dict
-
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Generate an improvement prompt from debate histories.")
+    parser = argparse.ArgumentParser(description="Generate an improvement prompt from the metrics log.")
     parser.add_argument(
-        "--history-dir",
-        default="histories",
-        help="Directory containing debate history files (default: histories)",
+        "--metrics-log",
+        default="metrics/log.md",
+        help="Path to the metrics log file (default: metrics/log.md)",
     )
     parser.add_argument(
         "--output",
@@ -31,46 +27,43 @@ def parse_args() -> argparse.Namespace:
     return parser.parse_args()
 
 
-def load_histories(history_dir: Path) -> Dict[str, str]:
-    if not history_dir.exists():
-        sys.exit(f"History directory not found: {history_dir}")
+def load_metrics_log(metrics_log: Path) -> str:
+    if not metrics_log.exists():
+        sys.exit(f"Metrics log not found: {metrics_log}")
 
-    files = [path for path in sorted(history_dir.iterdir()) if path.is_file()]
-    if not files:
-        sys.exit(f"No history files found in: {history_dir}")
+    content = metrics_log.read_text(encoding="utf-8").strip()
+    if not content:
+        sys.exit(f"Metrics log is empty: {metrics_log}")
 
-    return {file.name: file.read_text(encoding="utf-8") for file in files}
+    return content
 
 
-def build_prompt(histories: Dict[str, str]) -> str:
+def build_prompt(metrics_log: str) -> str:
     sections = [
         "# Improvement request prompt",
-        "Below is the history recorded by each judge. Using this context, propose what to improve in the next iteration.",
+        "Below is the cumulative metrics log. Using this context, propose what to improve in the next iteration.",
         "Output format:",
-        "- Improvement summary (3-7 bullet items)",
-        "- Severity: High/Medium/Low for each item",
-        "- Recommended actions: concrete steps and responsible role",
-        "- Questions to clarify (if any)",
-        "- Dependencies or assumptions to update (if any)",
+        "## Issue: <short title>",
+        "- Date: YYYY-MM-DD HH:mm",
+        "- Phases: hearing / orchestration / plan / spec / code / doc / review (keep only completed ones)",
+        "- Winner: A (Score) / B (Score)",
+        "- Loser 改善ポイント: 一文で簡潔に改善ポイントを出力する",
         "",
-        "## History",
+        "## Metrics log",
     ]
 
-    for filename, content in histories.items():
-        sections.append(f"### {filename}")
-        sections.append("````markdown")
-        sections.append(content.strip())
-        sections.append("````")
-        sections.append("")
+    sections.append("````markdown")
+    sections.append(metrics_log)
+    sections.append("````")
 
     return "\n".join(sections).strip() + "\n"
 
 
 def main() -> None:
     args = parse_args()
-    history_dir = Path(args.history_dir)
-    histories = load_histories(history_dir)
-    prompt = build_prompt(histories)
+    metrics_log = Path(args.metrics_log)
+    log_content = load_metrics_log(metrics_log)
+    prompt = build_prompt(log_content)
 
     if args.output:
         output_path = Path(args.output)
