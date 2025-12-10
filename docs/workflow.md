@@ -59,7 +59,7 @@
 3. At session start, orchestration declares "Phase 1: Hearing start."
 4. Follow the agreed phase order; judges append history per phase to `histories/`.
 5. Judges append metrics to `metrics/log.md` (or dated files) using `metrics/README.md`.
-6. Load all histories with `scripts/generate_improvement_prompt.py` to generate the next improvement-request prompt.
+6. After each phase, if the latest score for any role in that phase is below 50 or that role's win rate over its last 10 phase-matched logs is under 30% (skip if there are fewer than 10 phase-matched entries), suggest running `scripts/generate_improvement_prompt.py` to generate the next improvement-request prompt.
 
 ## Automation toggle
 
