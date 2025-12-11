@@ -4,5 +4,5 @@
 - Penalize unnecessary churn or missing migration/rollback steps.
 - Declare a single winner and enumerate any required guardrails for execution.
 - At phase end, append a histories entry (template: `histories/README.md`) to `histories/YYYYMMDD_code.md` (create if missing).
-- Also append a metrics entry (template: `metrics/README.md`) to the shared `metrics/log.md` (no dated metrics files), including tests and deployment notes.
+- Also append a metrics entry (template: `metrics/README.md`) to the phase-specific `metrics/code.md` (no dated metrics files or combined cross-phase logs), including tests and deployment notes.
 - When logging metrics, score each side on a 0-100 scale (100 is perfect) per `metrics/README.md`.
