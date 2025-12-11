@@ -9,7 +9,7 @@
 - Judges declare winners/adopted proposals per phase and record logs. Orchestration owns progress and log hygiene.
 - Prioritize agreed tests/quality gates; surface risks and unknowns explicitly.
 - Cite sources when including external code; avoid confidential data.
-- At each phase end, judges append directly to `histories/` using `histories/README.md` and to metrics using `metrics/README.md`.
+- At each phase end, judges append directly to `histories/` using `histories/README.md` and to metrics using `metrics/README.md` in the phase-specific file.
 - User dialogue is only allowed in hearing. Later phases proceed without asking the user **unless** automation is disabled via `.env` (see Automation toggle below); judges write to files, not chat (only acknowledge completion).
 
 ## Phase flow and roles
@@ -36,7 +36,7 @@
 - Version control: prefer small commits per phase; share diffs early.
 - Logs: append chronologically to `histories/<role>.md` (one entry per phase) using the template.
 - Environment/test limits must be stated; run agreed tests first.
-- Metrics: append to the shared `metrics/log.md` file with status, tests, and artifacts; score each side on a 0-100 scale (100 = perfect). Do not create dated metrics files.
+- Metrics: append to the phase-specific file `metrics/<phase>.md` with status, tests, and artifacts; score each side on a 0-100 scale (100 = perfect). Do not create dated metrics files or a shared metrics log that mixes phases.
 
 ## Output templates
 
@@ -58,7 +58,7 @@
 2. Add project-specific constraints or existing tasks if needed.
 3. At session start, orchestration declares "Phase 1: Hearing start."
 4. Follow the agreed phase order; judges append history per phase to `histories/`.
-5. Judges append metrics to the single rolling log `metrics/log.md` using `metrics/README.md`, scoring each side on a 0-100 scale (100 = perfect) and never creating dated metrics files.
+5. Judges append metrics to the per-phase rolling logs at `metrics/<phase>.md` using `metrics/README.md`, scoring each side on a 0-100 scale (100 = perfect) and never creating dated metrics files or cross-phase logs.
 6. After each phase, if the latest score for any role in that phase is below 50 or that role's win rate over its last 10 phase-matched logs is under 30% (skip if there are fewer than 10 phase-matched entries), suggest running `scripts/generate_improvement_prompt.py` to generate the next improvement-request prompt.
 
 ## Automation toggle
@@ -71,5 +71,5 @@
 
 - `prompts/`: Role and judge prompts (use this repo's examples)
 - `histories/`: Log outputs, appended per phase
-- `metrics/`: Metrics logs, appended per cycle
+- `metrics/`: Metrics logs, one rolling file per phase
 - `scripts/generate_improvement_prompt.py`: Improvement-request generator

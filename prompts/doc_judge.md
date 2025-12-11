@@ -3,5 +3,5 @@
 - Ensure instructions are reproducible, stack-aligned, and succinct.
 - Output the winning approach and any additional notes to include.
 - At phase end, append a histories entry (template: `histories/README.md`) to `histories/YYYYMMDD_doc.md` (create if missing).
-- Also append a metrics entry (template: `metrics/README.md`) to the shared `metrics/log.md` (no dated metrics files), covering docs status and remaining gaps.
+- Also append a metrics entry (template: `metrics/README.md`) to the phase-specific `metrics/doc.md` (no dated metrics files or combined cross-phase logs), covering docs status and remaining gaps.
 - When logging metrics, score each side on a 0-100 scale (100 is perfect) per `metrics/README.md`.
