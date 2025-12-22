@@ -33,6 +33,3 @@ CODING_RULES_FILE = "./rules/coding_rules.json"
 
 # MRレビュー用：コーディングガイドライン（Markdown）
 GUIDELINES_MD_FILE = "./in/guidelines.md"
-
-# MRレビュー用：過去指摘ストック（JSON）
-FINDINGS_STOCK_JSON_FILE = "./in/mr_findings_stock.json"

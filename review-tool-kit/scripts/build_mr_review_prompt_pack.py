@@ -59,13 +59,14 @@ def main() -> int:
     review_req = read_text(in_dir / "review_request.md")
 
     guidelines_file = pathlib.Path(str(getattr(config, "GUIDELINES_MD_FILE", "./in/guidelines.md")))
-    stock_file = pathlib.Path(str(getattr(config, "FINDINGS_STOCK_JSON_FILE", "./in/mr_findings_stock.json")))
+    # Use coding rules as the authoritative historical stock for MR review.
+    stock_file = pathlib.Path(str(getattr(config, "CODING_RULES_FILE", "./rules/coding_rules.json")))
     mr_file = pathlib.Path(args.mr_json)
 
     if not guidelines_file.exists():
         raise FileNotFoundError(f"GUIDELINES_MD_FILE not found: {guidelines_file}")
     if not stock_file.exists():
-        raise FileNotFoundError(f"FINDINGS_STOCK_JSON_FILE not found: {stock_file}")
+        raise FileNotFoundError(f"CODING_RULES_FILE not found: {stock_file}")
     if not mr_file.exists():
         raise FileNotFoundError(f"MR json not found: {mr_file}")
 
@@ -75,7 +76,7 @@ def main() -> int:
 
     rr = review_req
     rr = rr.replace("{{GUIDELINES_MD}}", read_text(guidelines_file))
-    rr = rr.replace("{{FINDINGS_STOCK_JSON}}", read_text(stock_file))
+    rr = rr.replace("{{CODING_RULES_JSON}}", read_text(stock_file))
     rr = rr.replace("{{MR_JSON}}", read_text(mr_file))
 
     compiled = compiled.replace("{{REVIEW_REQUEST}}", rr)

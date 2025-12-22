@@ -1,7 +1,7 @@
-You will receive:
+﻿You will receive:
 - MR JSON (diffs + comments + metadata)
 - Coding guidelines (Markdown)
-- Historical MR findings stock (JSON)
+- Existing coding rules JSON (authoritative baseline)
 
 You must:
 - Enforce the coding guidelines.
