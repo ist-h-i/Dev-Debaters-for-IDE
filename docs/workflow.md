@@ -11,6 +11,16 @@
 - Cite sources when including external code; avoid confidential data.
 - At each phase end, judges append directly to `histories/` using `histories/README.md` and to metrics using `metrics/README.md`.
 - User dialogue is only allowed in hearing. Later phases proceed without asking the user; judges write to files, not chat (only acknowledge completion).
+- No user choice for judges or winners: orchestration runs phases, calls judges, and advances automatically.
+
+## Phase inputs, outputs, and handoffs
+
+- Hearing (solo): Input = user issue/context. Output = clarified scope, constraints, acceptance checks, and unknowns. Handoff = feed summary to plan.
+- Plan (A/B -> judge): Input = hearing summary + issue. Output = two plans with milestones/risks/tests. Handoff = winning plan to spec.
+- Spec (A/B -> judge): Input = winning plan + issue. Output = two specs with data/IO, edge cases, and acceptance checks. Handoff = winning spec to code.
+- Code (A/B -> judge): Input = winning spec + issue. Output = two coding approaches with diffs/commands/tests. Handoff = winning code plan to doc.
+- Doc (A/B -> judge): Input = winning code plan + issue. Output = two doc updates (README/runbook/changelog). Handoff = winning doc notes to review.
+- Review & improvement (judge): Input = all prior winners + logs. Output = quality review, blockers, follow-ups, metrics update, and improvement prompts if needed. Handoff = next cycle instructions if not shipped.
 
 ## Phase flow and roles
 
@@ -24,7 +34,8 @@
 
 ## Progress rules
 
-- Each phase: agent discussion -> judge decision -> next actions.
+- Each phase: agent discussion -> judge decision -> next actions. No user prompts after hearing.
+- Orchestration must state which inputs are used, where outputs are written, and which phase starts next.
 - If stuck, orchestration poses a concise question to converge within one turn.
 - Version control: prefer small commits per phase; share diffs early.
 - Logs: append chronologically to `histories/<role>.md` (one entry per phase) using the template.
