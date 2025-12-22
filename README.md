@@ -5,6 +5,7 @@ A debate-style agent workflow template that runs via VSCode custom instructions.
 ## Contents
 - `docs/workflow.md`: Default workflow rules for the agents.
 - `prompts/`: Prompts for hearing/orchestration/spec/plan/code/doc/review agents and judges.
+- `prompts/review_requirements.md`: Project-specific review requirements that feed into prompt updates.
 - `scripts/generate_improvement_prompt.py`: Generates an improvement-request prompt from phase histories.
 
 ## How to use

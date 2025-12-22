@@ -1,14 +1,10 @@
 # Metrics log guide
-- Append one entry per cycle (append-only).
-- Keep one persistent log file `metrics/log.md`; do not split by day or issue so the full performance history stays in one place.
-- Judges append the latest entry directly at phase completion (create the file if missing).
+- Maintain one rolling metrics file per phase: `metrics/hearing.md`, `metrics/orchestration.md`, `metrics/plan.md`, `metrics/spec.md`, `metrics/code.md`, `metrics/doc.md`, and `metrics/review.md`. Append new entries to the appropriate phase file only; do not create dated metrics files or a single combined metrics log.
+- Write each entry in English using the template below.
 
 ```
-## Issue: <short title or link>
-- Date: YYYY-MM-DD
-- Phases: hearing / orchestration / plan / spec / code / doc / review (keep only completed ones)
-- Outcome: shipped / blocked / retry
-- Tests: <list tests run and results>
-- Artifacts: <files changed or key outputs>
-- Risks/Follow-ups: <remaining risks or items for next cycle>
+- Date: YYYY-MM-DD HH:mm
+- Phase: hearing / orchestration / plan / spec / code / doc / review
+- Winner: A (Score) / B (Score) — use a 0-100 scale where 100 is a perfect score.
+- Loser Improvement Point: Output a concise one-sentence improvement point.
 ```

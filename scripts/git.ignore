@@ -1,0 +1,6 @@
+# Local secrets
+config.py
+
+# Output
+out/
+*.json
