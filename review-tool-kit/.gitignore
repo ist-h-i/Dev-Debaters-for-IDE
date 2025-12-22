@@ -1,0 +1,15 @@
+# Local secrets
+config.py
+
+# Outputs
+out/
+review_out/
+in/compiled/
+
+# OS/IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+__pycache__/
+*.pyc

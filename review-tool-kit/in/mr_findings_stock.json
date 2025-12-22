@@ -1,0 +1,10 @@
+{
+  "version": "1.0",
+  "project": "",
+  "rules": [],
+  "common_review_points": [
+    "境界条件・null/undefined の扱い",
+    "例外系とログの粒度",
+    "命名・責務分離・副作用の局所化"
+  ]
+}

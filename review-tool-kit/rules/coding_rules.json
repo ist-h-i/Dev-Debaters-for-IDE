@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "updated_at": "",
+  "rules": [
+    {
+      "id": "R-001",
+      "title": "秘密情報をログに出力しない",
+      "importance": 3,
+      "category": "security",
+      "description": "アクセストークンや個人情報はログ出力しない。マスクまたは出力自体を避ける。",
+      "examples": {
+        "bad": "logger.info(token)",
+        "good": "logger.info('token=***')"
+      },
+      "tags": [
+        "token",
+        "log",
+        "security"
+      ]
+    }
+  ]
+}
